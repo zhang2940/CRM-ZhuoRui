@@ -131,7 +131,7 @@ $(function() {
 					<li ${perm.permParentId==null ? "class='active'" : ""} id="${perm.permId}" 
 						data-parentId="${perm.permParentId}" ${perm.permUrl==null ? "" : "data-url=\"".concat(perm.permUrl).concat("\"")}>
 						
-					    <a href="${perm.permUrl == null ? 'javascript:void(0)' : perm.permUrl }"
+					    <a href="${pageContext.request.contextPath }/${perm.permUrl == null ? 'javascript:void(0)' : perm.permUrl }"
 					     class="${perm.permUrl == null ? 'fathermnue' :'childmnue'}" 
 					    target="main"><i class="${perm.permUrl==null ? perm.permImg : ' '}  fa-lg" aria-hidden="true"></i>&nbsp;${perm.permName }</a></li>
 				</c:forEach>
