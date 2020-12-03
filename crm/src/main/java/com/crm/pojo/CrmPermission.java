@@ -19,6 +19,7 @@ public class CrmPermission implements Serializable {
 	private String permName; // 权限名称
 	private String permUrl; // 访问路径
 	private String permOrder; // 权限节点顺序
+	private String permImg;//菜单图标
 	private List<CrmRole> crmRoles; // 关联角色的集合
 
 	public Integer getPermId() {
@@ -67,6 +68,14 @@ public class CrmPermission implements Serializable {
 
 	public void setCrmRoles(List<CrmRole> crmRoles) {
 		this.crmRoles = crmRoles;
+	}
+
+	public String getPermImg() {
+		return permImg;
+	}
+
+	public void setPermImg(String permImg) {
+		this.permImg = permImg;
 	}
 
 	

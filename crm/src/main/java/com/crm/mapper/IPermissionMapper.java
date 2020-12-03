@@ -25,7 +25,7 @@ public interface IPermissionMapper {
 	 * @throws Exception
 	 */
 	@ResultMap("permissionResults")
-	@Select("select perm_id,perm_name,perm_url,perm_parent_id,perm_order"
+	@Select("select perm_id,perm_name,perm_url,perm_img,perm_parent_id,perm_order"
 			+ " from crm_permission order by perm_order")
 	public List<CrmPermission> queryAll() throws Exception;
 	
@@ -40,9 +40,10 @@ public interface IPermissionMapper {
 		@Result(property = "permParentId", column = "perm_parent_id"),
 		@Result(property = "permName", column = "perm_name"),
 		@Result(property = "permUrl", column = "perm_url"),
+		@Result(property = "permImg" ,column="perm_img"),
 		@Result(property = "permOrder", column = "perm_order")
 	})
-	@Select("select p.perm_id,perm_name,perm_url,perm_parent_id,perm_order from crm_role_permission rp join crm_permission"
+	@Select("select p.perm_id,perm_name,perm_url,perm_img,perm_parent_id,perm_order from crm_role_permission rp join crm_permission"
 			+ " p on rp.role_id=#{roleId} and rp.perm_id=p.perm_id order by perm_order")
 	public List<CrmPermission> getByRoleId(Integer roleId) throws Exception;
 	

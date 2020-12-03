@@ -6,13 +6,12 @@
 <link rel="stylesheet" type="text/css" href="css/css.css" />
 </head>
 
-<body>
+<body style="margin: 0">
 	<div id="pageAll">
 		<div class="page">
 			<!-- main页面样式 -->
 			<div class="indexL">
-				<img class="indexBn" src="img/indexBanner.png" /><br>
-				更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a>
+				<img class="indexBn" src="img/indexBanner.png"  style="background-repeat: repeat;" width="100%" height="100%"/>
 			</div>
 			<!-- main页面样式end -->
 		</div>
