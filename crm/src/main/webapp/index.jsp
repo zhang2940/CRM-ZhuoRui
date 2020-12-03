@@ -9,7 +9,7 @@
 	name="headmenu" id="mainFrame" title="mainFrame"><!-- 引用头部 -->
 <!-- 引用左边和主体部分 --> <frameset rows="100*" cols="210,*" scrolling="No"
 	framespacing="0" frameborder="no" border="0"> <frame
-	src="left.jsp" name="leftmenu" id="mainFrame" title="mainFrame">
+	src="inc/left.jsp" name="leftmenu" id="mainFrame" title="mainFrame">
 <frame src="main.jsp" name="main" scrolling="yes" noresize="noresize"
 	id="rightFrame" border="0" style="margin:0"  title="rightFrame"></frameset></frameset>
 </html>
