@@ -76,7 +76,7 @@
 	    <artifactId>pagehelper</artifactId>
 	    <version>5.2.0</version>
 	</dependency>
-  </dependencies>
+    </dependencies>
   <build>
     <finalName>crm</finalName>
   </build>
