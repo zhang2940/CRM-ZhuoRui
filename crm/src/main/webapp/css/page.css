@@ -23,10 +23,10 @@
 .logDiv .logGet {
 	width: 368px;
 	height: 408px;
-	background-color: white;
+background-color: rgba(42,69,82,0.5);
 	position: absolute;
 	top: 20%;
-	right: 20%;
+	right: 5%;
 }
 
 .logDiv .logGet .logDtip {

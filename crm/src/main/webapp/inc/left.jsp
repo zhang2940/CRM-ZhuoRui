@@ -8,6 +8,7 @@
 <title>首页左侧导航</title>
 <!--  <link rel="stylesheet" href="../css/index.css">-->
 <script type="text/javascript" src="../js/jquery.min.js"></script>
+<link rel="stylesheet" href="../font-awesome-4.7.0/css/font-awesome.css">
 <script type="text/javascript" src="../js/public.js"></script>
 </head>
 <script type="text/javascript">
@@ -129,9 +130,10 @@ $(function() {
 				<c:forEach var="perm" items="${sessionScope.userInfo.crmRole.crmPermissions }">
 					<li ${perm.permParentId==null ? "class='active'" : ""} id="${perm.permId}" 
 						data-parentId="${perm.permParentId}" ${perm.permUrl==null ? "" : "data-url=\"".concat(perm.permUrl).concat("\"")}>
+						
 					    <a href="${perm.permUrl == null ? 'javascript:void(0)' : perm.permUrl }"
 					     class="${perm.permUrl == null ? 'fathermnue' :'childmnue'}" 
-					    target="main">${perm.permName }</a></li>
+					    target="main"><i class="${perm.permUrl==null ? perm.permImg : ' '}  fa-lg" aria-hidden="true"></i>&nbsp;${perm.permName }</a></li>
 				</c:forEach>
 			</ul>
 			</aside>
