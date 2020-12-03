@@ -1,0 +1,15 @@
+.subject{
+    width: 400px;
+    padding-left: 5px;
+    text-align: center;
+}
+
+.font{
+    font-weight: bold;
+}
+
+.attachment{
+    width: 400px;
+    text-align: left;
+    padding: 9px 0;
+}

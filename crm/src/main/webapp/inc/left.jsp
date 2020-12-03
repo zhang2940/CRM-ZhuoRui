@@ -14,6 +14,11 @@
 <script type="text/javascript">
 //页面加载完毕后执行
 $(function() {
+	var ul = $(self.parent.frames[2].document).find("#sections").children('ul');
+	var li = $(self.parent.frames[2].document).find("#sections").children('ul').children('li');
+	//alert(self.parent.frames[2].document.getElementById("sections").childNodes);
+	//console.log($(self.parent.frames[2].document).find("#sections").children('ul').children('li'));
+	// $(self.parent.frames[2].document).find("#sections")
 	//父级菜单节点绑定事件
 	$('aside ul li.active').on('click', function() {
 		//获得父节点ID
@@ -24,8 +29,8 @@ $(function() {
 		subNodes.slideToggle();
 	});
 	//标签页首页节点绑定单击事件
-	$('ul.nav-tabs li').on('click', function() {
-		$('ul.nav-tabs li').removeClass('active');
+	li.on('click', function() {
+		li.removeClass('active');
 		$(this).addClass('active');
 	});
 	//子级父级节点绑定事件
@@ -36,6 +41,8 @@ $(function() {
 		var id = subNode.attr("id");
 		//获得URL
 		var url = subNode.attr("data-url");
+		url = "${pageContext.request.contextPath }/"+url;
+		
 		//判断是否是禁用连接
 		if(url == 'javascript:void(0);') {
 			return;
@@ -44,19 +51,19 @@ $(function() {
 		var name = subNode.children("a").text();
 		//标签栏中追加标签
 		//获得标签栏
-		var tabs = $('ul.nav-tabs');
+		var tabs = ul;
 		//通过当前ID属性选取子元素，获得当前子节点
 		var currentNode = tabs.children('li[id="'+id+'"]');
 		//判断当前子元素是否不存在
 		if(currentNode.length == 0) {
 			//添加标签
-			tabs.append('<li id="'+id+'" class="active"><a href="'+url+'" target="mainFrame">'
+			tabs.append('<li id="'+id+'" class="active"><a href="'+url+'" target="main">'
 					+name+'</a>'+'<i class="glyphicon glyphicon-remove"></i></li>');
 			//获取当前子节点
 			var currentNode = tabs.children('li[id="'+id+'"]');
 			//当前子节点绑定事件
 			currentNode.on('click', function() {
-				$('ul.nav-tabs li').removeClass('active');
+				li.removeClass('active');
 				$(this).addClass('active');
 			});
 			//标签关闭按钮绑定事件
@@ -71,7 +78,7 @@ $(function() {
 						siblingNode = parentNode.prev();
 					}
 					//设置激活状态
-					$('ul.nav-tabs li').removeClass('active');
+					li.removeClass('active');
 					siblingNode.addClass('active');
 					//单击节点中超链接
 					siblingNode.children('a').get(0).click();
@@ -85,7 +92,7 @@ $(function() {
 		//当前子节点设置激活状态
 		currentNode.addClass('active');
 		//主页面区域显示新的网页
-		mainFrame.location.href = url;
+		self.parent.frames[3].document.location.href = url;
 	});
 });
 </script>

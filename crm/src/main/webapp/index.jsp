@@ -10,6 +10,10 @@
 <!-- 引用左边和主体部分 --> <frameset rows="100*" cols="210,*" scrolling="No"
 	framespacing="0" frameborder="no" border="0"> <frame
 	src="inc/left.jsp" name="leftmenu" id="mainFrame" title="mainFrame">
-<frame src="main.jsp" name="main" scrolling="yes" noresize="noresize"
-	id="rightFrame" border="0" style="margin:0"  title="rightFrame"></frameset></frameset>
+	<frameset rows="60,*" cols="*" scrolling="No" framespacing="0"
+	frameborder="no" border="0">
+	<frame src="inc/right_header.jsp" name="right_header" 
+	id="right_headerFrame" border="0" style="margin:0"  title="right_headerFrame">
+	<frame src="main.jsp" name="main" scrolling="yes" noresize="noresize"
+	id="rightFrame" border="0" style="margin:0"  title="rightFrame"></frameset></frameset></frameset>
 </html>
