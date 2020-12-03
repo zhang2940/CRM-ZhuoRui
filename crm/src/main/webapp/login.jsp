@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>登录-有点</title>
+<title>登录</title>
 <link rel="stylesheet" type="text/css" href="css/public.css" />
 <link rel="stylesheet" type="text/css" href="css/page.css" />
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -18,7 +18,7 @@
 
 	<!-- 登录body -->
 	<div class="logDiv">
-		<img class="logBanner" src="img/timg (1).jpg" style="width: 100%; height: 600px;"  />
+		<img class="logBanner" src="img/timg (1).jpg" style="width: 100%; height: 700px;"  />
 		<div class="logGet">
 			<!-- 头部提示信息 -->
 			<div class="logD logDtip">
