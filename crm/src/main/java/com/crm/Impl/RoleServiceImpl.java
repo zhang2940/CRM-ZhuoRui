@@ -46,7 +46,7 @@ public class RoleServiceImpl implements IRoleService {
 		//封装模型数据
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
-		return "role/rolelist";
+		return "pages/role/rolelist";
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class LoginServiceImpl implements ILoginoutService {
 			return "index";
 		}
 		model.addAttribute("error", "用户名或密码错误!");
-		return "log";
+		return "login";
 	}
 
 	@Override

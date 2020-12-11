@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<base href="${pageContext.request.contextPath}/" />
+	<base href="${pageContext.request.contextPath}/" />
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
@@ -27,11 +27,12 @@
 		/**
 		 * desc: 添加
 		 */
-	    function add() {
-	    	location.href = 'user/addview.do';
+	    function writing() {
+	    	location.href = 'mail/write.do';
 	    }
-	    /**
-		 * desc: 修改
+		
+		/**
+		 * desc: 查看邮件
 		 */
 		function reading(id) {
 			$('body').append('<form id="tempForm"></form>');
@@ -104,7 +105,7 @@
 					<th>序号</th>
 					<th>状态</th>
 					<th>标题</th>
-					<th>收件人</th>
+					<th>发件人</th>
 					<th>时间</th>
 					<th>操作</th>
 				</tr>
@@ -118,7 +119,7 @@
 						 <c:if test="${mail.mailStatus == 3 }">已删除</c:if>
 						</td>
 						<td>${mail.mailSubject }</td>
-						<td>${mail.mailto.accountName }</td>
+						<td>${mail.mailfrom.accountName }</td>
 						<td><fmt:formatDate value="${mail.mailCreatetime }" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
 						<td>
 							<a href="javascript:void(0);" onclick="reading(${mail.mailId})"><i class="glyphicon glyphicon-edit edit"></i>查看</a>
@@ -135,7 +136,7 @@
 		</form>
 		<section>
 			<section class="btn-groups">
-				<button class="btn btn-primary" onclick="add();"><i class="glyphicon glyphicon-plus"></i>&nbsp;写邮件</button>
+				<button class="btn btn-primary" onclick="writing();"><i class="glyphicon glyphicon-plus"></i>&nbsp;写邮件</button>
 				<button class="btn btn-danger" onclick="deleteBatch();"><i class="glyphicon glyphicon-trash"></i>&nbsp;批量删除</button>
 			</section>
 			<section class="page-info">

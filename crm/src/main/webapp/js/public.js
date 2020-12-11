@@ -1,7 +1,8 @@
 // head.html 的弹出框 JS
-// $(".goOut").click(function(){
+ //$(".goOut").click(function(){
 //    $(".closeOut").show();
-//  });
+
+// });
 //  $(".p1").click(function(){
 //    $(".closeOut").hide();
 //  });

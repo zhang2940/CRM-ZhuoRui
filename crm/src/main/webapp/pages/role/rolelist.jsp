@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<base href="${pageContext.request.contextPath}/" />
+	<base href="${pageContext.request.contextPath}/" />
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
@@ -18,7 +18,7 @@
 		 */
 		function pageQuery(pageNum) {
 			//设置提交的请求参数
-			$('#form1 p input[name=saccountName]').val($('#saccountName').val());
+			$('#form1 p input[name=sroleName]').val($('#sroleName').val());
 			$('#pageNum').val(pageNum);
 			//提交表单
 			$('#form1').get(0).submit();
@@ -28,16 +28,17 @@
 		 * desc: 添加
 		 */
 	    function add() {
-	    	location.href = 'user/addview.do';
+	    	location.href = 'role/addview.do';
 	    }
-	    /**
+		
+		/**
 		 * desc: 修改
 		 */
-		function reading(id) {
+		function update(id) {
 			$('body').append('<form id="tempForm"></form>');
 			var form = $('#tempForm');
 			form.attr('method', 'post');
-			form.attr('action', 'mail/read.do');
+			form.attr('action', 'role/updateview.do');
 			form.append('<input type="hidden" name="id" value="' + id + '" />');
 			form.get(0).submit();
 		}
@@ -47,17 +48,30 @@
 		 */
 		function deleting(id) {
 			confirm(null, "确定要删除数据?", function() {
-				var saccountName = $('#form1 #saccountName').val();
+				//location.href = 'role/delete.do?id='+id;
+				var sroleName = $('#form1 #sroleName').val();
 				var pageNum = $('#form1 #pageNum').val();
 				$('body').append('<form id="tempForm"></form>');
 				var form = $('#tempForm');
 				form.attr('method', 'post');
-				form.attr('action', 'user/delete.do');
+				form.attr('action', 'role/delete.do');
 				form.append('<input type="hidden" name="id" value="' + id + '" />');
-				form.append('<input type="hidden" name="saccountName" value="' + saccountName + '" />');
+				form.append('<input type="hidden" name="sroleName" value="' + sroleName + '" />');
 				form.append('<input type="hidden" name="pageNum" value="' + pageNum + '" />');
 				form.get(0).submit();
 			});
+		}
+		
+		/**
+		 * desc: 分配权限
+		 */
+		function grant(id) {
+			$('body').append('<form id="tempForm"></form>');
+			var form = $('#tempForm');
+			form.attr('method', 'post');
+			form.attr('action', 'role/grantview.do');
+			form.append('<input type="hidden" name="id" value="' + id + '" />');
+			form.get(0).submit();
 		}
 		
 	    /**
@@ -69,16 +83,15 @@
 	    	 //判断是否未选择数据
 	    	 if(count < 1) {
 	    		 alert('警告', '请选择要删除的数据!');
-	    		 return;	    		
+	    		 return;
 	    	 }
-	    	
 	    	 //弹出选择对话框
 	    	 confirm(null, "确定要删除选择的数据?", function() {
-	    		 var saccountName = $('#form1 #saccountName').val();
+	    		 var sroleName = $('#form1 #sroleName').val();
 				 var pageNum = $('#form1 #pageNum').val();
 				 var form =  $('#form2');
-				 form.attr('action', 'user/delete.do');
-				 form.append('<input type="hidden" name="saccountName" value="' + saccountName + '" />');
+				 form.attr('action', 'role/delete.do');
+				 form.append('<input type="hidden" name="sroleName" value="' + sroleName + '" />');
 				 form.append('<input type="hidden" name="pageNum" value="' + pageNum + '" />');
 				 form.get(0).submit();
 	    	 });
@@ -87,11 +100,11 @@
 </head>
 <body>
 	<header style="">
-		<form id="form1" method="post" action="mail/query.do" class="form-inline">
+		<form id="form1" method="post" action="role/query.do" class="form-inline">
 			<section class="form-group">
-				<p><input type="text" name="saccountName" placeholder="按用户名搜索!"  value="${param.saccountName }"
+				<p><input type="text" name="sroleName" placeholder="按角色名搜索!"  value="${param.sroleName }"
 					class="form-control" /></p><input type="submit" value="搜索"  class="btn btn-success"/>
-					<input type="hidden" id="saccountName" value="${param.saccountName }" />
+					<input type="hidden" id="sroleName" value="${param.sroleName }" />
 					<input type="hidden" id="pageNum" name="pageNum" value="${pageInfo.pageNum }" />
 			</section>
 		</form>
@@ -102,27 +115,22 @@
 				<tr>
 					<th><input type="checkbox" /></th>
 					<th>序号</th>
-					<th>状态</th>
-					<th>标题</th>
-					<th>收件人</th>
-					<th>时间</th>
+					<th>角色名</th>
+					<th>操作人</th>
+					<th>操作时间</th>
 					<th>操作</th>
 				</tr>
-				<c:forEach var="mail" items="${list }" varStatus="status">
+				<c:forEach var="role" items="${list }" varStatus="status">
 					<tr>
-						<td><input type="checkbox" name="id" value="${mail.mailId }" /></td>
+						<td><input type="checkbox" name="id" value="${role.roleId }" /></td>
 						<td>${(pageInfo.pageNum-1)*pageInfo.pageSize + status.count }</td>
+						<td>${role.roleName }</td>
+						<td>${role.operUser }</td>
+						<td><fmt:formatDate value="${role.operTime }" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
 						<td>
-						 <c:if test="${mail.mailStatus == 1 }">未读</c:if>
-						 <c:if test="${mail.mailStatus == 2 }">已读</c:if>
-						 <c:if test="${mail.mailStatus == 3 }">已删除</c:if>
-						</td>
-						<td>${mail.mailSubject }</td>
-						<td>${mail.mailto.accountName }</td>
-						<td><fmt:formatDate value="${mail.mailCreatetime }" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
-						<td>
-							<a href="javascript:void(0);" onclick="reading(${mail.mailId})"><i class="glyphicon glyphicon-edit edit"></i>查看</a>
-							<a href="javascript:void(0);" onclick="deleting(${mail.mailId})"><i class="glyphicon glyphicon-remove remove"></i>删除</a>
+							<a href="javascript:void(0);" onclick="update(${role.roleId})"><i class="glyphicon glyphicon-edit edit"></i>修改</a>
+							<a href="javascript:void(0);" onclick="deleting(${role.roleId})"><i class="glyphicon glyphicon-remove remove"></i>删除</a>
+							<a href="javascript:void(0);" onclick="grant(${role.roleId})"><i class="glyphicon glyphicon-cog grant"></i>权限</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -135,7 +143,7 @@
 		</form>
 		<section>
 			<section class="btn-groups">
-				<button class="btn btn-primary" onclick="add();"><i class="glyphicon glyphicon-plus"></i>&nbsp;写邮件</button>
+				<button class="btn btn-primary" onclick="add();"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加</button>
 				<button class="btn btn-danger" onclick="deleteBatch();"><i class="glyphicon glyphicon-trash"></i>&nbsp;批量删除</button>
 			</section>
 			<section class="page-info">

@@ -21,7 +21,7 @@
 			</p>
 			<p class="p2">
 				<a href="#" class="resetPWD">重置密码</a>&nbsp;&nbsp;<a
-					href="{:U('Admin/Index/exit')}" class="goOut">退出</a>
+					href="${pageContext.request.contextPath}/logout.do" class="goOut" target='_top'>退出</a>
 			</p>
 		</div>
 		<!-- onclick="{if(confirm(&quot;确定退出吗&quot;)){return true;}return false;}" -->
@@ -34,12 +34,9 @@
 			</p>
 			<p class="p2">确定退出当前用户？</p>
 			<P class="p3">
-				<a class="ok yes" href="#">确定</a><a class="ok no" href="#">取消</a>
+				<a class="ok yes" href="logout.do">确定</a><a class="ok no" href="#">取消</a>
 			</p>
 		</div>
 	</div>
-
-
-
 </body>
 </html>

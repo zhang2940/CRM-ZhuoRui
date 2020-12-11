@@ -1,7 +1,16 @@
 package com.crm.controller;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.crm.pojo.CrmAccount;
+import com.crm.pojo.CrmMail;
+import com.crm.service.IMailService;
 
 /** 
  * @classComment 邮件管理
@@ -12,23 +21,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/mail")
+@SessionAttributes({"userInfo"})
 public class MailController {
 
-	@RequestMapping("/maillogin")
+	@Resource
+	private IMailService imailService;
+	@RequestMapping("/read")
 	public String mailLogin() {
 		return "pages/mail/readMessage";
 		
 	}
 	
 	@RequestMapping("/receive")
-	public String receive() {
-		return "pages/mail/receive_message_list";
-		
+	public String receive(Model model, @SessionAttribute CrmAccount userInfo, Integer pageNum) {
+		try {
+			String nextPath = imailService.queryReceive(model, userInfo.getAccountId(), pageNum);
+			return nextPath;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "error";
 	}
 	
 	@RequestMapping("/send")
-	public String send() {
-		return "pages/mail/send_message_list";
+	public String send(Model model, @SessionAttribute CrmAccount userInfo, Integer pageNum) {
+		try {
+			String nextPath = imailService.querySend(model, userInfo.getAccountId(), pageNum);
+			return nextPath;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "error";
 		
 	}
 	
@@ -39,8 +62,26 @@ public class MailController {
 	}
 	
 	@RequestMapping("/write")
-	public String write() {
-		return "pages/mail/send";
+	public String write(Model model) {
+		try {
+			String nextPath = imailService.queryUser(model);
+			return nextPath;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "error";
+		
+	}
+	
+	@RequestMapping("/sendmessage")
+	public String sendmessage(Model model, String mailSubject) {
+		try {
+			System.out.println(mailSubject);
+//			System.out.println(crmMail.getMailContent());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "error";
 		
 	}
 }

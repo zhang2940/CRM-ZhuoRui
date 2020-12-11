@@ -30,14 +30,15 @@
 	    function add() {
 	    	location.href = 'user/addview.do';
 	    }
-	    /**
+		
+		/**
 		 * desc: 修改
 		 */
-		function reading(id) {
+		function update(id) {
 			$('body').append('<form id="tempForm"></form>');
 			var form = $('#tempForm');
 			form.attr('method', 'post');
-			form.attr('action', 'mail/read.do');
+			form.attr('action', 'user/updateview.do');
 			form.append('<input type="hidden" name="id" value="' + id + '" />');
 			form.get(0).submit();
 		}
@@ -87,7 +88,7 @@
 </head>
 <body>
 	<header style="">
-		<form id="form1" method="post" action="mail/query.do" class="form-inline">
+		<form id="form1" method="post" action="user/query.do" class="form-inline">
 			<section class="form-group">
 				<p><input type="text" name="saccountName" placeholder="按用户名搜索!"  value="${param.saccountName }"
 					class="form-control" /></p><input type="submit" value="搜索"  class="btn btn-success"/>
@@ -102,27 +103,25 @@
 				<tr>
 					<th><input type="checkbox" /></th>
 					<th>序号</th>
-					<th>状态</th>
-					<th>标题</th>
-					<th>收件人</th>
-					<th>时间</th>
+					<th>用户名</th>
+					<th>密码</th>
+					<th>身份</th>
+					<th>性别</th>
+					<th>注册时间</th>
 					<th>操作</th>
 				</tr>
-				<c:forEach var="mail" items="${list }" varStatus="status">
+				<c:forEach var="user" items="${list }" varStatus="status">
 					<tr>
-						<td><input type="checkbox" name="id" value="${mail.mailId }" /></td>
+						<td><input type="checkbox" name="id" value="${user.accountId }" /></td>
 						<td>${(pageInfo.pageNum-1)*pageInfo.pageSize + status.count }</td>
+						<td>${user.accountName }</td>
+						<td>${user.accountPassword }</td>
+						<td>${user.crmRole.roleName }</td>
+						<td>${user.accountGender }</td>
+						<td><fmt:formatDate value="${user.operTime }" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
 						<td>
-						 <c:if test="${mail.mailStatus == 1 }">未读</c:if>
-						 <c:if test="${mail.mailStatus == 2 }">已读</c:if>
-						 <c:if test="${mail.mailStatus == 3 }">已删除</c:if>
-						</td>
-						<td>${mail.mailSubject }</td>
-						<td>${mail.mailto.accountName }</td>
-						<td><fmt:formatDate value="${mail.mailCreatetime }" pattern="yyyy年MM月dd日 HH:mm:ss" /></td>
-						<td>
-							<a href="javascript:void(0);" onclick="reading(${mail.mailId})"><i class="glyphicon glyphicon-edit edit"></i>查看</a>
-							<a href="javascript:void(0);" onclick="deleting(${mail.mailId})"><i class="glyphicon glyphicon-remove remove"></i>删除</a>
+							<a href="javascript:void(0);" onclick="update(${user.accountId})"><i class="glyphicon glyphicon-edit edit"></i>修改</a>
+							<a href="javascript:void(0);" onclick="deleting(${user.accountId})"><i class="glyphicon glyphicon-remove remove"></i>删除</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -135,7 +134,7 @@
 		</form>
 		<section>
 			<section class="btn-groups">
-				<button class="btn btn-primary" onclick="add();"><i class="glyphicon glyphicon-plus"></i>&nbsp;写邮件</button>
+				<button class="btn btn-primary" onclick="add();"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加</button>
 				<button class="btn btn-danger" onclick="deleteBatch();"><i class="glyphicon glyphicon-trash"></i>&nbsp;批量删除</button>
 			</section>
 			<section class="page-info">
